@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+license.json
+
+# Runtime data and backups
+data/*
+!data/mibs/
+data/.machine-id
+backups/*
+!backups/configs/
+
+# Logs
+*.log
+logs/
+
+# System / OS
+.DS_Store
+Thumbs.db

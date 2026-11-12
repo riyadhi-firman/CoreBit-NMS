@@ -1,0 +1,12 @@
+<svg width="400" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle -->
+  <circle cx="60" cy="60" r="55" fill="none" stroke="#1a237e" stroke-width="8" />
+  <!-- Mi -->
+  <text x="25" y="85" font-family="sans-serif" font-weight="900" font-size="65" fill="#1a237e">Mi</text>
+  <!-- Media -->
+  <text x="135" y="85" font-family="sans-serif" font-weight="900" font-size="65" fill="#d32f2f">Media</text>
+  <!-- PT MITRA MEDIA DATA -->
+  <text x="135" y="110" font-family="sans-serif" font-weight="bold" font-size="16" fill="#1a237e">PT. MITRA MEDIA DATA</text>
+  <!-- INTERNET SERVICE PROVIDER -->
+  <text x="135" y="130" font-family="sans-serif" font-weight="bold" font-size="14" fill="#000000">INTERNET SERVICE PROVIDER</text>
+</svg>

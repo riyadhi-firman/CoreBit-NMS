@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "description": "Vendor MIB index for SNMP OID resolution. Similar to LibreNMS/Zabbix MIB organization.",
+  "vendors": {
+    "mikrotik": {
+      "name": "MikroTik",
+      "description": "MikroTik RouterOS devices",
+      "oidPrefixes": ["1.3.6.1.4.1.14988"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.14988.*"],
+      "mibFiles": ["MIKROTIK-MIB.mib"]
+    },
+    "brocade": {
+      "name": "Brocade",
+      "description": "Brocade/Broadcom switches and SAN equipment",
+      "oidPrefixes": ["1.3.6.1.4.1.1588", "1.3.6.1.4.1.1991"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.1588.*", "1.3.6.1.4.1.1991.*"],
+      "mibFiles": ["BROCADE-PRODUCTS-MIB.txt"]
+    },
+    "cisco": {
+      "name": "Cisco",
+      "description": "Cisco networking equipment",
+      "oidPrefixes": ["1.3.6.1.4.1.9"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.9.*"],
+      "mibFiles": []
+    },
+    "hp": {
+      "name": "HP/HPE",
+      "description": "HP and HPE networking and server equipment (including Aruba, iLO)",
+      "oidPrefixes": ["1.3.6.1.4.1.11", "1.3.6.1.4.1.232", "1.3.6.1.4.1.14823"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.11.*", "1.3.6.1.4.1.232.*", "1.3.6.1.4.1.14823.*"],
+      "mibFiles": []
+    },
+    "juniper": {
+      "name": "Juniper",
+      "description": "Juniper Networks equipment",
+      "oidPrefixes": ["1.3.6.1.4.1.2636"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.2636.*"],
+      "mibFiles": []
+    },
+    "dell": {
+      "name": "Dell",
+      "description": "Dell networking and server equipment",
+      "oidPrefixes": ["1.3.6.1.4.1.674"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.674.*"],
+      "mibFiles": []
+    },
+    "ubiquiti": {
+      "name": "Ubiquiti",
+      "description": "Ubiquiti Networks (UniFi, EdgeMax)",
+      "oidPrefixes": ["1.3.6.1.4.1.41112"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.41112.*"],
+      "mibFiles": []
+    },
+    "synology": {
+      "name": "Synology",
+      "description": "Synology NAS devices",
+      "oidPrefixes": ["1.3.6.1.4.1.6574"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.6574.*"],
+      "mibFiles": []
+    },
+    "qnap": {
+      "name": "QNAP",
+      "description": "QNAP NAS devices",
+      "oidPrefixes": ["1.3.6.1.4.1.24681"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.24681.*"],
+      "mibFiles": []
+    },
+    "apc": {
+      "name": "APC/Schneider",
+      "description": "APC UPS and PDU equipment",
+      "oidPrefixes": ["1.3.6.1.4.1.318"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.318.*"],
+      "mibFiles": []
+    },
+    "netgear": {
+      "name": "Netgear",
+      "description": "Netgear networking equipment",
+      "oidPrefixes": ["1.3.6.1.4.1.4526"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.4526.*"],
+      "mibFiles": []
+    },
+    "fortinet": {
+      "name": "Fortinet",
+      "description": "Fortinet FortiGate and FortiSwitch",
+      "oidPrefixes": ["1.3.6.1.4.1.12356"],
+      "sysObjectIdPatterns": ["1.3.6.1.4.1.12356.*"],
+      "mibFiles": []
+    },
+    "common": {
+      "name": "Common/Standard",
+      "description": "Standard MIBs (IF-MIB, RFC1213, SNMPv2-MIB, etc.) - always loaded",
+      "oidPrefixes": ["1.3.6.1.2.1"],
+      "sysObjectIdPatterns": [],
+      "mibFiles": [],
+      "alwaysLoad": true
+    }
+  }
+}

@@ -1,0 +1,104 @@
+# CoreBit Network Manager - Docker Compose
+# 
+# Quick Start (using pre-built image from GitHub Container Registry):
+#   1. Copy .env.example to .env and configure
+#   2. Run: docker compose up -d
+#   3. Access at: http://localhost:3000
+#
+# Building locally (from source):
+#   docker compose up -d --build
+#
+# Default login: admin / admin
+#
+# Updating:
+#   docker compose pull && docker compose up -d
+
+services:
+  #=============================================================================
+  # PostgreSQL Database
+  #=============================================================================
+  db:
+    image: postgres:16-alpine
+    container_name: corebit-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-corebit}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-corebit123}
+      POSTGRES_DB: ${POSTGRES_DB:-corebit}
+    volumes:
+      - corebit_db:/var/lib/postgresql/data
+    # Expose DB port on host for app running in host network mode
+    # Using port 5433 to avoid conflicts with host PostgreSQL installations
+    ports:
+      - "127.0.0.1:${DB_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-corebit} -d ${POSTGRES_DB:-corebit}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - corebit-network
+
+  #=============================================================================
+  # CoreBit Application
+  #=============================================================================
+  app:
+    # Use pre-built image from GitHub Container Registry
+    image: ghcr.io/cis2131/corebit-docker:latest
+    # Uncomment to build from source instead of pulling from registry:
+    # build:
+    #   context: ..
+    #   dockerfile: docker/Dockerfile
+    container_name: corebit-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    # HOST NETWORK MODE: Required for monitoring devices on your LAN
+    # This gives the container full access to the host's network
+    network_mode: host
+    # Note: When using host network, ports are not mapped - app runs directly on host port 3000
+    # ports:
+    #   - "${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: ${APP_PORT:-3000}
+      HOST: 0.0.0.0
+      # DATABASE_URL is the only required database setting
+      # PG* variables are auto-parsed from DATABASE_URL if not set
+      # Using 127.0.0.1 because app runs in host network mode (shares host's network stack)
+      DATABASE_URL: postgresql://${POSTGRES_USER:-corebit}:${POSTGRES_PASSWORD:-corebit123}@127.0.0.1:${DB_PORT:-5433}/${POSTGRES_DB:-corebit}
+      SESSION_SECRET: ${SESSION_SECRET:-please-change-this-secret-in-production}
+    volumes:
+      - corebit_backups:/app/backups
+      - corebit_data:/app/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:${APP_PORT:-3000}/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+#=============================================================================
+# Persistent Volumes
+#=============================================================================
+volumes:
+  corebit_db:
+    name: corebit_db
+  corebit_backups:
+    name: corebit_backups
+  corebit_data:
+    name: corebit_data
+
+#=============================================================================
+# Network
+#=============================================================================
+networks:
+  corebit-network:
+    name: corebit-network
+    driver: bridge
