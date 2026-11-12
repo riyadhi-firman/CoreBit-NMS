@@ -21,3 +21,4 @@ logs/
 # System / OS
 .DS_Store
 Thumbs.db
+.gitconfig
