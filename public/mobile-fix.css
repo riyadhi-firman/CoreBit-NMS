@@ -8,9 +8,18 @@ a[href="/"] img,
 [class*="Logo"] img {
   content: url("/logo.svg") !important;
   width: auto !important;
-  height: 48px !important; /* Increased size */
-  max-width: 200px !important;
+  height: 38px !important;
+  max-width: 160px !important;
   object-fit: contain !important;
+  filter: none !important;
+}
+
+/* Larger logo on login card */
+.flex.justify-center img[src*="favicon"],
+.flex.justify-center img[src*="logo"],
+.flex.justify-center.mb-2 img {
+  height: 72px !important;
+  max-width: 240px !important;
 }
 
 /* Target specifically the text next to the logo in header/sidebar */
@@ -27,11 +36,14 @@ aside h1 {
   display: none !important;
 }
 
+/* Dark mode logo */
 .dark img[src*="logo"], 
 .dark img[src*="favicon"],
 .dark .w-10.h-10,
-.dark a[href="/"] img {
-  filter: brightness(0) invert(1) !important;
+.dark a[href="/"] img,
+.dark [class*="Logo"] img {
+  content: url("/logo-dark.svg") !important;
+  filter: none !important;
 }
 
 /* Fallback for inline SVGs or other logo implementations */
@@ -47,13 +59,14 @@ aside h1 {
   content: "";
   display: inline-block;
   width: 120px;
-  height: 32px;
+  height: 36px;
   background: url("/logo.svg") no-repeat center / contain;
   margin-right: 8px;
 }
 
 .dark .flex.items-center.gap-2:has(svg)::before {
-  filter: brightness(0) invert(1);
+  background-image: url("/logo-dark.svg") !important;
+  filter: none !important;
 }
 
 @media (max-width: 640px) {
